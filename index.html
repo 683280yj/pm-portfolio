@@ -102,6 +102,8 @@ section{width:var(--w);margin:0 auto;padding:100px 0 20px}
 .tier .tag{font:10px var(--mono);letter-spacing:.2em;color:var(--accent);min-width:96px}
 .tier .desc{color:var(--muted);font-size:14.5px}
 .tier .desc b{color:var(--text);font-weight:600}
+.tier .desc a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--line)}
+.tier .desc a:hover{border-bottom-color:var(--accent)}
 .flow-line{height:22px;width:1px;background:var(--line);margin:0 auto}
 .flow-line::after{content:"";display:block;width:5px;height:5px;border-radius:50%;background:var(--accent);
   margin:0 auto;animation:drop 2.6s linear infinite}
@@ -246,11 +248,11 @@ footer{width:var(--w);margin:90px auto 0;padding:50px 0 80px}
   <div class="sec-head reveal"><span class="idx">03</span><h2>其他真实部署</h2></div>
   <p class="sec-lede reveal">产品感觉不只写在文档里——这些是跑在我自己域名和服务器上的服务，每个都在日常使用。</p>
   <div class="flow-col reveal">
-    <div class="tier"><span class="tag">图床</span><span class="desc"><b>ImageVault</b> · im.idky.tech —— 基于开源内核自建的图床，上传管理外链一体，博客配图的固定基础设施；另 fork CloudFlare-ImgBed 作纯 CF 备选方案</span></div>
-    <div class="tier"><span class="tag">域名邮箱</span><span class="desc"><b>cloudflare_temp_email</b> · mail.idky.tech —— 部署开源临时邮箱（Workers + D1 全在免费额度），注册验证码与主邮箱隔离</span></div>
-    <div class="tier"><span class="tag">文献阅读</span><span class="desc"><b>Paper Burner X</b> · burner-x-teal.vercel.app —— 自部署开源 AI 文献工作站：多引擎 OCR、多模型翻译、Agentic RAG 对照阅读</span></div>
-    <div class="tier"><span class="tag">研究工具</span><span class="desc"><b>stata-mcp</b> —— 开源 MCP 连接 AI 与 Stata；我深度使用并定制扩展，用它跑通论文实证全流程（案例三的技术底座）</span></div>
-    <div class="tier"><span class="tag">知识库</span><span class="desc"><b>Quartz 数字花园</b> —— 基于 Quartz v5 搭建的大学知识库站点，笔记一键发布为可检索的双链网站</span></div>
+    <div class="tier"><span class="tag">图床</span><span class="desc"><b>ImageVault</b> · <a href="https://im.idky.tech" target="_blank" rel="noopener">im.idky.tech</a> —— 基于开源内核自建的图床，上传管理外链一体，博客配图的固定基础设施；另 fork <a href="https://github.com/MarSeventh/CloudFlare-ImgBed" target="_blank" rel="noopener">CloudFlare-ImgBed</a> 作纯 CF 备选方案</span></div>
+    <div class="tier"><span class="tag">域名邮箱</span><span class="desc"><a href="https://github.com/dreamhunter2333/cloudflare_temp_email" target="_blank" rel="noopener"><b>cloudflare_temp_email</b></a> · <a href="https://mail.idky.tech" target="_blank" rel="noopener">mail.idky.tech</a> —— 部署开源临时邮箱（Workers + D1 全在免费额度），注册验证码与主邮箱隔离</span></div>
+    <div class="tier"><span class="tag">文献阅读</span><span class="desc"><b>Paper Burner X</b> · <a href="https://burner-x-teal.vercel.app/" target="_blank" rel="noopener">burner-x-teal.vercel.app</a> —— 自部署开源 AI 文献工作站：多引擎 OCR、多模型翻译、Agentic RAG 对照阅读</span></div>
+    <div class="tier"><span class="tag">研究工具</span><span class="desc"><a href="https://github.com/683280yj/stata-mcp" target="_blank" rel="noopener"><b>stata-mcp</b></a> —— 开源 MCP 连接 AI 与 Stata；我深度使用并定制扩展，用它跑通论文实证全流程（案例三的技术底座）</span></div>
+    <div class="tier"><span class="tag">知识库</span><span class="desc"><b>Quartz 数字花园</b> —— 基于 <a href="https://quartz.jzhao.xyz/" target="_blank" rel="noopener">Quartz v5</a> 搭建的大学知识库站点，笔记一键发布为可检索的双链网站</span></div>
   </div>
 </section>
 
