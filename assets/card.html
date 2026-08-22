@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>姚军 · AI 产品经理名片</title>
+<style>
+  :root{
+    --bg:#0B0B0D; --panel:#121216; --line:rgba(231,162,74,.22);
+    --accent:#E7A24A; --ink:#F2EDE3; --muted:#9A948A; --seal:#C2402A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:900px;height:1200px;overflow:hidden}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB",sans-serif;
+    position:relative; display:flex; flex-direction:column;
+    padding:60px 64px 0;
+  }
+  /* atmosphere */
+  body::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(560px 420px at 88% -6%, rgba(231,162,74,.16), transparent 62%),
+      radial-gradient(420px 320px at -8% 108%, rgba(231,162,74,.07), transparent 60%);}
+  body::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+    background:repeating-linear-gradient(90deg, transparent 0 47px, var(--accent) 47px 48px),
+               repeating-linear-gradient(0deg, transparent 0 47px, var(--accent) 47px 48px);
+    mask-image:radial-gradient(720px 560px at 82% 8%, #000, transparent 70%);
+    -webkit-mask-image:radial-gradient(720px 560px at 82% 8%, #000, transparent 70%);}
+
+  .mono{font-family:"SF Mono",Menlo,monospace}
+
+  .top{display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+  .kicker{font-size:15px;letter-spacing:.32em;color:var(--accent)}
+  .kicker small{display:block;margin-top:10px;font-size:12px;letter-spacing:.18em;color:var(--muted)}
+  .seal{width:86px;height:86px;border-radius:12px;background:var(--seal);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Songti SC",serif;font-weight:900;font-size:52px;color:#FFF6EA;
+    transform:rotate(-4deg);box-shadow:inset 0 0 0 3px rgba(255,246,234,.85), inset 0 0 0 7px var(--seal), 0 10px 30px rgba(194,64,42,.35)}
+
+  h1{z-index:2;font-family:"Songti SC",serif;font-weight:900;font-size:128px;line-height:1.04;margin-top:34px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .handle{margin-top:14px;font-size:20px;color:var(--muted);letter-spacing:.08em;z-index:2}
+  .handle b{color:var(--ink);font-weight:600}
+  .pitch{margin-top:26px;font-size:21px;line-height:1.7;color:#CFC8BC;max-width:640px;z-index:2}
+  .pitch strong{color:var(--accent);font-weight:600}
+
+  .rule{height:1px;background:linear-gradient(90deg,var(--accent) 0 56px,var(--line) 56px);margin:38px 0 30px}
+
+  .facts{display:flex;gap:40px;z-index:2}
+  .fact .lab{font-size:13px;letter-spacing:.28em;color:var(--accent);margin-bottom:10px}
+  .fact .val{font-size:18px;line-height:1.75;color:var(--ink)}
+  .fact .val span{color:var(--muted)}
+
+  .sec{margin-top:36px;z-index:2}
+  .sec-t{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .sec-t .t{font-size:15px;letter-spacing:.3em;color:var(--accent)}
+  .sec-t .ln{flex:1;height:1px;background:var(--line)}
+
+  .proj{display:flex;gap:16px;padding:11px 0;align-items:baseline}
+  .proj .no{font-size:14px;color:var(--accent);width:26px;flex:none}
+  .proj .name{font-size:19px;font-weight:600;width:308px;flex:none}
+  .proj .desc{font-size:16px;color:var(--muted);line-height:1.55}
+
+  .bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;
+    padding:26px 0 30px;border-top:1px solid var(--line);z-index:2;background:rgba(11,11,13,.6)}
+  .links{display:grid;grid-template-columns:auto auto;gap:12px 44px}
+  .lk{display:flex;align-items:baseline;gap:12px;font-size:17px}
+  .lk .k{color:var(--accent);font-size:13px;letter-spacing:.14em;width:64px;flex:none}
+  .lk .v{color:var(--ink)} .lk .v span{color:var(--muted);font-size:15px}
+  .qrbox{text-align:center}
+  .qrim{width:172px;height:172px;padding:10px;border-radius:14px;background:#F5EFE2;
+    box-shadow:0 12px 34px rgba(0,0,0,.55)}
+  .qrim img{width:100%;height:100%;display:block}
+  .qrbox p{margin-top:10px;font-size:13px;letter-spacing:.12em;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="kicker mono">YAO JUN<small>求职方向 · AI PRODUCT MANAGER</small></div>
+    <div class="seal">姚</div>
+  </div>
+
+  <h1>姚军<em>。</em></h1>
+  <div class="handle mono">idky · <b>AI 产品经理</b> · 安徽财经大学 数字经济硕士</div>
+  <p class="pitch">把 <strong>AI 能力</strong>翻译成可落地的产品：<strong>多 Agent 系统架构</strong> × <strong>工具测评选型</strong> × <strong>0→1 PRD</strong>，兼有数据分析功底（Stata / CFPS 实证）。</p>
+
+  <div class="rule"></div>
+
+  <div class="facts">
+    <div class="fact">
+      <div class="lab">实习经历</div>
+      <div class="val">奇瑞汽车 · 品牌经理<br>闲鱼 · 运营<span>　三创赛全国一等奖</span></div>
+    </div>
+    <div class="fact">
+      <div class="lab">技能标签</div>
+      <div class="val">产品设计 · Agent 架构<br>提示工程 · 数据分析</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t"><span class="t mono">代表项目</span><span class="ln"></span></div>
+    <div class="proj"><span class="no mono">01</span><span class="name">OpenClaw「六部制」Agent 系统</span><span class="desc">10+ 常驻 Agent 分层架构与三级模型降级</span></div>
+    <div class="proj"><span class="no mono">02</span><span class="name">研桌 ResearchDesk · 0→1 PRD</span><span class="desc">自然语言实证研究工作台：信任架构 + 北极星指标</span></div>
+    <div class="proj"><span class="no mono">03</span><span class="name">AI 编程工具四维测评框架</span><span class="desc">任务适配 × 上下文管理 × 成本 × 可控性，真实任务实测</span></div>
+  </div>
+
+  <div class="bottom">
+    <div class="links mono">
+      <div class="lk"><span class="k">作品集</span><span class="v">work.idkyjun.me</span></div>
+      <div class="lk"><span class="k">主页</span><span class="v">idkyjun.me</span></div>
+      <div class="lk"><span class="k">GitHub</span><span class="v">github.com/683280yj</span></div>
+      <div class="lk"><span class="k">博客</span><span class="v">idky.tech</span></div>
+    </div>
+    <div class="qrbox">
+      <div class="qrim"><img src="qr-work.png" alt=""></div>
+      <p class="mono">扫码看作品集</p>
+    </div>
+  </div>
+</body>
+</html>
