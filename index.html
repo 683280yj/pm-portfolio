@@ -1,0 +1,638 @@
+<!doctype html>
+<!-- ============================================================
+  idky · AI 产品经理作品集
+  TODO 待替换项（搜索 "TODO"）：
+  1. 真实姓名（当前用 handle: idky）
+  2. 邮箱 / 微信联系方式（footer contact 段）
+============================================================ -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="idky — 经济学背景的 AI 产品经理。运营一套 10+ Agent 的个人 AI 系统，开源 MCP 工具作者。作品集与案例拆解。">
+<title>idky · AI 产品经理作品集</title>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --bg:#0E0F12;
+  --surface:#15171C;
+  --surface2:#1B1E25;
+  --line:#262A32;
+  --line-soft:rgba(237,234,227,.08);
+  --text:#EDEAE3;
+  --muted:#9AA0AB;
+  --faint:#5C626D;
+  --amber:#FFA94D;
+  --amber-dim:rgba(255,169,77,.13);
+  --steel:#8FB8CE;
+  --mono:"SF Mono","Menlo","Consolas","Courier New",monospace;
+  --serif:"Songti SC","STSong","SimSun",serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --w:min(1080px,92vw);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  background:var(--bg);color:var(--text);
+  font:16px/1.75 var(--sans);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* engineering-paper atmosphere */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(1100px 560px at 72% -8%,rgba(255,169,77,.07),transparent 62%),
+    radial-gradient(900px 500px at -10% 110%,rgba(143,184,206,.05),transparent 60%),
+    repeating-linear-gradient(0deg,transparent 0 31px,var(--line-soft) 31px 32px),
+    repeating-linear-gradient(90deg,transparent 0 31px,var(--line-soft) 31px 32px);
+}
+::selection{background:var(--amber);color:#14100A}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.mono{font-family:var(--mono)}
+
+/* ---------- side rail ---------- */
+.rail{
+  position:fixed;left:20px;bottom:40px;z-index:5;
+  writing-mode:vertical-rl;
+  font:10px/1 var(--mono);letter-spacing:.34em;color:var(--faint);
+  user-select:none;
+}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(4vw,28px);height:64px;
+  background:rgba(14,15,18,.78);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+nav .logo{font:700 15px var(--serif);letter-spacing:.08em}
+nav .logo b{color:var(--amber)}
+nav .links{display:flex;gap:26px}
+nav .links a{
+  font:11px var(--mono);letter-spacing:.14em;color:var(--muted);
+  transition:color .2s;
+}
+nav .links a span{color:var(--faint);margin-right:5px}
+nav .links a:hover{color:var(--amber)}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+  width:var(--w);margin:0 auto;padding:120px 0 60px;position:relative;
+}
+.kicker{
+  font:11px var(--mono);letter-spacing:.22em;color:var(--amber);
+  margin-bottom:26px;
+}
+.kicker::before{content:"// ";color:var(--faint)}
+.hero h1{
+  font:700 clamp(38px,6.4vw,72px)/1.18 var(--serif);
+  letter-spacing:.01em;max-width:16em;
+}
+.hero h1 em{
+  font-style:normal;color:var(--amber);
+  background:linear-gradient(transparent 78%,var(--amber-dim) 78%);
+}
+.hero .sub{
+  margin:30px 0 0;max-width:34em;color:var(--muted);font-size:15.5px;
+}
+.hero .sub b{color:var(--text);font-weight:600}
+.stats{
+  display:flex;gap:0;margin-top:52px;flex-wrap:wrap;
+  border-top:1px solid var(--line);
+}
+.stat{
+  padding:20px 36px 4px 0;margin-right:36px;
+  border-top:2px solid transparent;margin-top:-1px;
+}
+.stat:hover{border-top-color:var(--amber)}
+.stat .n{font:600 26px var(--mono);color:var(--text)}
+.stat .n i{font-style:normal;color:var(--amber)}
+.stat .l{font:11px var(--mono);letter-spacing:.12em;color:var(--faint);margin-top:2px}
+.cta{display:flex;gap:16px;margin-top:48px;flex-wrap:wrap}
+.btn{
+  font:12px var(--mono);letter-spacing:.16em;
+  padding:13px 26px;border-radius:4px;transition:all .2s;
+}
+.btn.pri{background:var(--amber);color:#14100A;font-weight:600}
+.btn.pri:hover{background:#FFBE78;transform:translateY(-1px)}
+.btn.ghost{border:1px solid var(--line);color:var(--muted)}
+.btn.ghost:hover{border-color:var(--amber);color:var(--amber)}
+.scroll-hint{
+  position:absolute;bottom:26px;left:0;
+  font:10px var(--mono);letter-spacing:.3em;color:var(--faint);
+  animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{50%{transform:translateY(6px)}}
+
+/* ---------- sections ---------- */
+section{width:var(--w);margin:0 auto;padding:96px 0 30px}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:14px}
+.sec-head .idx{font:11px var(--mono);letter-spacing:.2em;color:var(--amber)}
+.sec-head h2{font:700 clamp(26px,3.4vw,36px) var(--serif);letter-spacing:.02em}
+.sec-head .en{font:10px var(--mono);letter-spacing:.3em;color:var(--faint);margin-left:auto}
+.sec-lede{color:var(--muted);font-size:15px;max-width:38em;margin-bottom:44px}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- case cards (PRD cover style) ---------- */
+.case{
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+  background:linear-gradient(180deg,var(--surface),rgba(21,23,28,.4));
+  transition:border-color .25s,transform .25s;
+}
+.case:hover{border-color:rgba(255,169,77,.45);transform:translateY(-3px)}
+.case + .case{margin-top:26px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr}
+.case-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 28px;border-bottom:1px dashed var(--line);
+  font:11px var(--mono);letter-spacing:.14em;color:var(--faint);
+}
+.case-head .no{color:var(--muted)}
+.stamp{
+  font:700 10.5px var(--mono);letter-spacing:.18em;
+  border:1.5px solid currentColor;border-radius:3px;
+  padding:4px 10px;transform:rotate(2.5deg);
+}
+.stamp.shipped{color:var(--amber);background:var(--amber-dim)}
+.stamp.progress{color:var(--steel)}
+.stamp.planned{color:var(--faint)}
+.case-body{padding:30px 28px 34px}
+.case-body h3{font:700 25px/1.35 var(--serif);margin-bottom:6px}
+.case-body h3 span{color:var(--faint);font-weight:400}
+.role{font:11px var(--mono);letter-spacing:.1em;color:var(--amber);opacity:.85;margin-bottom:18px}
+.case-body ul li{
+  position:relative;padding-left:20px;margin-bottom:10px;
+  color:var(--muted);font-size:14.5px;
+}
+.case-body ul li::before{content:"—";position:absolute;left:0;color:var(--faint)}
+.case-body ul li b{color:var(--text);font-weight:600}
+.case-foot{
+  display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.tag{
+  font:10.5px var(--mono);letter-spacing:.08em;color:var(--muted);
+  border:1px solid var(--line);border-radius:3px;padding:3px 9px;
+}
+.metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);margin-top:26px;border:1px solid var(--line);
+  border-radius:6px;overflow:hidden;
+}
+.metric{background:var(--surface2);padding:14px 16px}
+.metric .n{font:600 19px var(--mono);color:var(--amber)}
+.metric .l{font:10.5px var(--mono);letter-spacing:.08em;color:var(--faint);margin-top:2px}
+.case-pair{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.case-pair .case{margin:0}
+
+/* ---------- architecture diagram ---------- */
+.sys-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:44px;align-items:start}
+.diagram{border:1px solid var(--line);border-radius:8px;padding:34px 26px;background:rgba(21,23,28,.55)}
+.tier{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:16px 18px}
+.tier-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font:10.5px var(--mono);letter-spacing:.16em;margin-bottom:12px;
+}
+.tier-head .t{color:var(--amber)}
+.tier-head .d{color:var(--faint);letter-spacing:.06em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{
+  font:11px var(--mono);color:var(--muted);
+  border:1px solid var(--line);border-radius:4px;
+  padding:6px 11px;background:var(--surface2);
+  transition:all .2s;white-space:nowrap;
+}
+.chip b{color:var(--text);font-weight:600;margin-right:6px}
+.chip:hover{border-color:var(--amber);color:var(--text);transform:translateY(-1px)}
+.chip.hot{border-color:rgba(255,169,77,.5)}
+.chip.hot b{color:var(--amber)}
+.arrow{color:var(--faint);font-family:var(--mono);font-size:12px}
+.divider{color:var(--faint);opacity:.5;font-size:11px}
+.flow{height:34px;position:relative;display:flex;justify-content:center}
+.flow::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
+.flow i{
+  position:absolute;top:0;left:50%;width:5px;height:5px;margin-left:-2px;
+  border-radius:50%;background:var(--amber);
+  animation:flow 2.4s linear infinite;
+}
+.flow i:nth-child(2){animation-delay:.8s}
+.flow i:nth-child(3){animation-delay:1.6s}
+@keyframes flow{
+  0%{transform:translateY(-3px);opacity:0}
+  18%{opacity:1}
+  82%{opacity:1}
+  100%{transform:translateY(31px);opacity:0}
+}
+.principles h3{font:600 17px var(--serif);margin-bottom:18px}
+.principles h3 span{font:10px var(--mono);color:var(--faint);letter-spacing:.2em;margin-left:10px}
+.principle{
+  border-left:2px solid var(--amber);padding:4px 0 4px 18px;margin-bottom:24px;
+}
+.principle b{display:block;font-size:14.5px;font-weight:600;margin-bottom:4px}
+.principle p{color:var(--muted);font-size:13.5px;line-height:1.7}
+.fallback-note{
+  margin-top:8px;font:11px/1.9 var(--mono);color:var(--faint);
+  border:1px dashed var(--line);border-radius:6px;padding:14px 16px;
+}
+.fallback-note em{color:var(--steel);font-style:normal}
+
+/* ---------- skills ---------- */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.skill-col{
+  border:1px solid var(--line);border-radius:8px;padding:26px 24px;
+  background:linear-gradient(180deg,var(--surface),transparent);
+  transition:border-color .25s;
+}
+.skill-col:hover{border-color:rgba(255,169,77,.4)}
+.skill-col h3{
+  font:11px var(--mono);letter-spacing:.2em;color:var(--amber);
+  padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--line);
+}
+.skill-col h3 span{color:var(--faint);margin-left:8px}
+.skill-col li{
+  position:relative;padding-left:18px;margin-bottom:11px;
+  font-size:14px;color:var(--muted);
+}
+.skill-col li::before{content:"▸";position:absolute;left:0;color:var(--faint);font-size:11px;top:2px}
+.skill-col li b{color:var(--text);font-weight:600}
+.toolbox{
+  margin-top:34px;font:12px/2 var(--mono);color:var(--faint);
+  border:1px dashed var(--line);border-radius:6px;padding:16px 20px;
+}
+.toolbox b{color:var(--muted);font-weight:400}
+.toolbox i{font-style:normal;color:var(--amber);opacity:.7;margin:0 6px}
+
+/* ---------- path / timeline ---------- */
+.path{position:relative;max-width:720px}
+.path::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.milestone{position:relative;padding:0 0 40px 40px}
+.milestone::before{
+  content:"";position:absolute;left:0;top:7px;width:15px;height:15px;
+  border-radius:50%;border:1.5px solid var(--faint);background:var(--bg);
+}
+.milestone.now::before{border-color:var(--amber);background:var(--amber);box-shadow:0 0 0 5px var(--amber-dim)}
+.milestone .when{font:10.5px var(--mono);letter-spacing:.2em;color:var(--faint)}
+.milestone.now .when{color:var(--amber)}
+.milestone h3{font:700 19px var(--serif);margin:6px 0 8px}
+.milestone p{color:var(--muted);font-size:14.5px;max-width:34em}
+.milestone p b{color:var(--text);font-weight:600}
+
+/* ---------- footer / terminal ---------- */
+footer{width:var(--w);margin:60px auto 0;padding:40px 0 70px}
+.term{
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+  background:#0A0B0E;
+}
+.term-bar{
+  display:flex;align-items:center;gap:7px;
+  padding:11px 16px;border-bottom:1px solid var(--line);background:var(--surface);
+}
+.term-bar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.term-bar i:first-child{background:#3A3F49}
+.term-bar span{margin-left:auto;font:10px var(--mono);letter-spacing:.14em;color:var(--faint)}
+.term-body{padding:22px 24px;font:13px/2.1 var(--mono)}
+.term-body .p{color:var(--amber)}
+.term-body .out{color:var(--muted)}
+.term-body .out a{color:var(--steel);border-bottom:1px solid rgba(143,184,206,.3)}
+.term-body .out a:hover{color:var(--amber);border-color:var(--amber)}
+.cursor{
+  display:inline-block;width:8px;height:15px;background:var(--amber);
+  vertical-align:-2px;animation:blink 1.1s step-end infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.copy{
+  margin-top:34px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font:10.5px var(--mono);letter-spacing:.14em;color:var(--faint);
+}
+
+/* ---------- load-in stagger ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero>*{animation:rise .8s cubic-bezier(.2,.7,.3,1) both}
+.hero>.kicker{animation-delay:.05s}
+.hero>h1{animation-delay:.15s}
+.hero>.sub{animation-delay:.3s}
+.hero>.stats{animation-delay:.45s}
+.hero>.cta{animation-delay:.58s}
+.hero>.scroll-hint{animation:rise .8s .9s both,bob 2.2s 1.8s ease-in-out infinite}
+
+/* ---------- responsive ---------- */
+@media(max-width:960px){
+  .rail{display:none}
+  .case-grid{grid-template-columns:1fr}
+  .sys-wrap{grid-template-columns:1fr}
+  .skills{grid-template-columns:1fr}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  nav .links a span{display:none}
+  nav .links{gap:16px}
+  .case-pair{grid-template-columns:1fr}
+  .stat{padding-right:22px;margin-right:22px}
+  section{padding:70px 0 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<aside class="rail">PORTFOLIO · 2026 — AI PRODUCT — 经济学 × 工程 × AI</aside>
+
+<nav>
+  <a class="logo" href="#top">idky<b>.</b></a>
+  <div class="links">
+    <a href="#cases"><span>01</span>案例</a>
+    <a href="#system"><span>02</span>系统拆解</a>
+    <a href="#skills"><span>03</span>技能</a>
+    <a href="#path"><span>04</span>路径</a>
+    <a href="https://github.com/683280yj" target="_blank" rel="noopener">GITHUB ↗</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <p class="kicker">PORTFOLIO — AI PRODUCT MANAGER</p>
+  <!-- TODO: 求职时建议替换为真实姓名 -->
+  <h1>把 AI 的能力，<br>做成<em>能运转</em>的产品。</h1>
+  <p class="sub">
+    经济学计量实证出身，现在是<b>一套 10+ 常驻 Agent 系统</b>的设计者与运营者，
+    也是开源 MCP 工具的作者。我不关心模型有多聪明——我在意它如何变成
+    <b>稳定、可控、成本合理</b>的产品。
+  </p>
+  <div class="stats">
+    <div class="stat"><div class="n">10<i>+</i></div><div class="l">常驻 AGENT</div></div>
+    <div class="stat"><div class="n">3<i>级</i></div><div class="l">模型成本分层</div></div>
+    <div class="stat"><div class="n">7×24</div><div class="l">云上在线运行</div></div>
+    <div class="stat"><div class="n">1<i>个</i></div><div class="l">开源 MCP 项目</div></div>
+  </div>
+  <div class="cta">
+    <a class="btn pri" href="#cases">查看案例 ↓</a>
+    <a class="btn ghost" href="https://github.com/683280yj" target="_blank" rel="noopener">GITHUB ↗</a>
+  </div>
+  <p class="scroll-hint">SCROLL ↓</p>
+</header>
+
+<main>
+
+<!-- ============ 01 案例 ============ -->
+<section id="cases">
+  <div class="sec-head reveal">
+    <span class="idx">01</span><h2>案例</h2><span class="en">CASES</span>
+  </div>
+  <p class="sec-lede reveal">三个真实项目，对应产品经理的三种核心能力：系统设计、竞争分析、0→1 定义。</p>
+
+  <!-- CASE A -->
+  <article class="case reveal">
+    <div class="case-head">
+      <span class="no">CASE-001 / 多 AGENT 系统</span>
+      <span class="stamp shipped">SHIPPED · 运行中</span>
+    </div>
+    <div class="case-body">
+      <h3>「六部制」个人 AI 助理系统 <span>/ OpenClaw</span></h3>
+      <p class="role">产品定义 · 架构设计 · 成本工程 · 运维 — 独立负责</p>
+      <ul>
+        <li><b>问题：</b>个人任务散落在聊天窗口里，单模型单线程作业——贵、慢、不可控，也没有分工与审核。</li>
+        <li><b>方案：</b>参照唐代三省六部制设计 10+ 常驻 Agent：<b>三省决策</b>（中书规划 → 门下审核 → 尚书调度），<b>六部执行</b>（吏·人事 / 户·财务 / 礼·文案 / 兵·安全 / 刑·合规 / 工·工程），另设太子（陪学）与早报（简报）。</li>
+        <li><b>成本设计：</b>按任务价值做 3 级模型分层——旗舰模型只留给决策链路，文案与高频工程任务由轻量模型承接。</li>
+        <li><b>可靠性：</b>主 → 备 → 应急三级模型 fallback，单点故障不影响在线；部署于云服务器，systemd 常驻。</li>
+      </ul>
+      <div class="metrics">
+        <div class="metric"><div class="n">10+</div><div class="l">常驻 AGENT</div></div>
+        <div class="metric"><div class="n">3 级</div><div class="l">模型成本分层</div></div>
+        <div class="metric"><div class="n">3 级</div><div class="l">故障降级链路</div></div>
+        <div class="metric"><div class="n">7×24</div><div class="l">在线运行</div></div>
+      </div>
+      <div class="case-foot">
+        <span class="tag">多 Agent 架构</span><span class="tag">模型选型</span><span class="tag">成本控制</span><span class="tag">Linux/VPS</span><span class="tag">systemd 运维</span>
+      </div>
+    </div>
+  </article>
+
+  <div class="case-pair">
+    <!-- CASE B -->
+    <article class="case reveal">
+      <div class="case-head">
+        <span class="no">CASE-002 / 竞品分析</span>
+        <span class="stamp progress">IN PROGRESS</span>
+      </div>
+      <div class="case-body">
+        <h3>AI 编程工具深度测评</h3>
+        <p class="role">竞品分析 · 评测框架设计 — 撰写中</p>
+        <ul>
+          <li><b>视角：</b>不跑分。作为 Claude Code / Codex CLI / Qwen Code 的重度日常用户，回答「什么任务该交给谁」。</li>
+          <li><b>框架：</b>任务适配 × 上下文管理 × 成本 × 可控性，四维评测。</li>
+          <li><b>产出：</b>选型决策树 + 团队引入建议。</li>
+        </ul>
+        <div class="case-foot">
+          <span class="tag">竞争分析</span><span class="tag">评测框架</span><span class="tag">AI Coding</span>
+        </div>
+      </div>
+    </article>
+    <!-- CASE C -->
+    <article class="case reveal">
+      <div class="case-head">
+        <span class="no">CASE-003 / 0→1 设计</span>
+        <span class="stamp planned">PLANNED · W3</span>
+      </div>
+      <div class="case-body">
+        <h3>数据研究工作台 <span>/ PRD + 原型</span></h3>
+        <p class="role">需求分析 · PRD · 原型设计 — 进行中</p>
+        <ul>
+          <li><b>起点：</b>写计量论文时，大部分时间耗在数据清洗与回归迭代，而非思考本身。</li>
+          <li><b>方向：</b>把开源项目 stata-mcp 的能力产品化——研究者用自然语言驱动完整实证流程。</li>
+          <li><b>产出：</b>PRD + 可点击原型。</li>
+        </ul>
+        <div class="case-foot">
+          <span class="tag">0→1</span><span class="tag">PRD</span><span class="tag">原型设计</span><span class="tag">Stata/MCP</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 02 系统拆解 ============ -->
+<section id="system">
+  <div class="sec-head reveal">
+    <span class="idx">02</span><h2>系统拆解：六部制如何运转</h2><span class="en">SYSTEM DESIGN</span>
+  </div>
+  <p class="sec-lede reveal">CASE-001 的架构图与三条设计原则。产品经理的工作不是画组织架构——是决定「谁决策、谁执行、花多少钱、坏了怎么办」。</p>
+
+  <div class="sys-wrap">
+    <div class="diagram reveal">
+      <div class="tier">
+        <div class="tier-head"><span class="t">接入层 / GATEWAY</span><span class="d">消息接入 · 会话路由</span></div>
+        <div class="chips"><span class="chip"><b>IM 通道</b>微信 / 终端</span><span class="chip"><b>Gateway</b>路由 · 鉴权</span></div>
+      </div>
+      <div class="flow"><i></i><i></i><i></i></div>
+      <div class="tier">
+        <div class="tier-head"><span class="t">决策层 · 三省</span><span class="d">规划 → 审核 → 调度</span></div>
+        <div class="chips">
+          <span class="chip hot"><b>中书省</b>规划</span><span class="arrow">→</span>
+          <span class="chip hot"><b>门下省</b>审核</span><span class="arrow">→</span>
+          <span class="chip hot"><b>尚书省</b>调度</span>
+        </div>
+      </div>
+      <div class="flow"><i></i><i></i><i></i></div>
+      <div class="tier">
+        <div class="tier-head"><span class="t">执行层 · 六部 + 特设</span><span class="d">任务分派 · 并行执行</span></div>
+        <div class="chips">
+          <span class="chip"><b>吏部</b>人事</span>
+          <span class="chip"><b>户部</b>财务</span>
+          <span class="chip"><b>礼部</b>文案</span>
+          <span class="chip"><b>兵部</b>安全</span>
+          <span class="chip"><b>刑部</b>合规</span>
+          <span class="chip"><b>工部</b>工程</span>
+          <span class="divider">‖</span>
+          <span class="chip"><b>太子</b>陪学</span>
+          <span class="chip"><b>早报</b>简报</span>
+        </div>
+      </div>
+      <div class="flow"><i></i><i></i><i></i></div>
+      <div class="tier">
+        <div class="tier-head"><span class="t">模型层 · 三级分层</span><span class="d">按任务价值分配预算</span></div>
+        <div class="chips">
+          <span class="chip hot"><b>T1</b>qwen3.5-plus · 决策/重推理</span>
+          <span class="chip"><b>T2</b>qwen3-coder-plus · 文案/代码</span>
+          <span class="chip"><b>T3</b>qwen3-coder-next · 高频工程</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="principles reveal">
+      <h3>设计原则 <span>PRINCIPLES</span></h3>
+      <div class="principle">
+        <b>① 决策与执行分离</b>
+        <p>规划必须过门下省审核再交尚书省调度——避免同一个模型既当运动员又当裁判，输出质量有把关链路。</p>
+      </div>
+      <div class="principle">
+        <b>② 成本跟着价值走</b>
+        <p>旗舰模型只花在决策与重推理链路；文案、高频工程任务由轻量模型承接。分层不是省钱技巧，是产品定价思维。</p>
+      </div>
+      <div class="principle">
+        <b>③ 任何单点都可降级</b>
+        <p>模型配置了三级 fallback：主供应商故障自动切备用，再切应急通道。可用性优先于单次回答质量。</p>
+      </div>
+      <div class="fallback-note">
+        $ fallback chain:<br>
+        &nbsp;&nbsp;bailian/qwen3.5-plus<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;→ qwen-portal/coder-model<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ CLIProxyAPI/gpt-5.3-codex<br>
+        <em># 全自动切换，服务不中断</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 技能 ============ -->
+<section id="skills">
+  <div class="sec-head reveal">
+    <span class="idx">03</span><h2>技能</h2><span class="en">SKILLS</span>
+  </div>
+  <p class="sec-lede reveal">只列真实做过的事——每一条都能在案例里找到对应证据。</p>
+  <div class="skills">
+    <div class="skill-col reveal">
+      <h3>产品 <span>/ PRODUCT</span></h3>
+      <ul>
+        <li><b>需求分析</b> — 从自身工作流痛点提炼产品问题（CASE-003）</li>
+        <li><b>竞品分析</b> — 自建评测框架，输出选型决策（CASE-002）</li>
+        <li><b>0→1 定义</b> — 问题 → 方案 → PRD → 原型完整链路</li>
+        <li><b>优先级与取舍</b> — 成本 / 可用性 / 质量的三角权衡（CASE-001）</li>
+      </ul>
+    </div>
+    <div class="skill-col reveal">
+      <h3>AI <span>/ AI ENGINEERING</span></h3>
+      <ul>
+        <li><b>多 Agent 系统设计</b> — 分工、审核链路、任务路由（10+ Agent 在线）</li>
+        <li><b>MCP 协议与工具链</b> — 开源 stata-mcp 作者，让 AI 驱动 Stata</li>
+        <li><b>Prompt 与上下文工程</b> — Agent 人设 / SOP / 记忆体系设计</li>
+        <li><b>模型选型与成本分层</b> — 三级模型 + 三级 fallback 的实战配置</li>
+      </ul>
+    </div>
+    <div class="skill-col reveal">
+      <h3>数据 <span>/ DATA</span></h3>
+      <ul>
+        <li><b>计量经济学</b> — Stata 实证分析，二值选择模型等</li>
+        <li><b>微观数据处理</b> — CFPS 面板数据清洗与变量构建</li>
+        <li><b>实证研究设计</b> — 论文：土地集中政策对农村家庭消费结构的影响</li>
+        <li><b>研究自动化</b> — Python + AI 工作流替代重复劳动</li>
+      </ul>
+    </div>
+  </div>
+  <p class="toolbox reveal">
+    <b>$ 日常工具链</b><br>
+    Claude Code<i>·</i>Codex CLI<i>·</i>Qwen Code<i>·</i>Stata<i>·</i>Python<i>·</i>Git<i>·</i>Linux / VPS<i>·</i>Figma<span style="opacity:.55">（学习中）</span>
+  </p>
+</section>
+
+<!-- ============ 04 路径 ============ -->
+<section id="path">
+  <div class="sec-head reveal">
+    <span class="idx">04</span><h2>路径</h2><span class="en">THE PATH</span>
+  </div>
+  <p class="sec-lede reveal">从计量经济学到 AI 产品经理——每一步都在解决同一个问题：让机器替人做重复的事。</p>
+  <div class="path">
+    <div class="milestone reveal">
+      <p class="when">起点 · 计量经济学</p>
+      <h3>先学会向数据提问</h3>
+      <p>经济学训练给了两样东西：<b>用数据验证直觉的习惯</b>，和「任何结论都有前提条件」的边界感。论文用 CFPS 数据研究土地集中政策对农村家庭消费结构的影响。</p>
+    </div>
+    <div class="milestone reveal">
+      <p class="when">转折 · 把研究流程交给机器</p>
+      <h3>不忍心重复劳动，于是写了 stata-mcp</h3>
+      <p>数据清洗、跑回归、调稳健性检验——大量机械重复。把它做成开源 MCP 项目后，<b>AI 可以直接驱动 Stata 完成整个实证流程</b>。第一次体会到：定义好接口，机器就能接管流程。</p>
+    </div>
+    <div class="milestone reveal">
+      <p class="when">深入 · 运营一套多 Agent 系统</p>
+      <h3>从工具到系统：六部制上线</h3>
+      <p>单个工具不够了。设计并上线 10+ Agent 的个人 AI 系统，开始真正关心<b>分工边界、成本预算、可靠性降级</b>——这些全是产品问题，不只是技术问题。</p>
+    </div>
+    <div class="milestone now reveal">
+      <p class="when">现在 · AI 产品经理</p>
+      <h3>把闭环变成职业</h3>
+      <p>「用户要什么 → 系统怎么建 → 成本怎么算 → 坏了怎么办」——这个完整闭环是我已经在做的事，现在把它作为职业方向，<b>到更大的场景里做一遍</b>。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="term reveal">
+    <div class="term-bar"><i></i><i></i><i></i><span>idky@portfolio — zsh</span></div>
+    <div class="term-body">
+      <div><span class="p">$</span> whoami</div>
+      <div class="out">经济学出身的 AI 产品经理 · 先弄懂问题，再谈方案</div>
+      <div><span class="p">$</span> ls cases/</div>
+      <div class="out">CASE-001_六部制多Agent系统&nbsp;&nbsp;CASE-002_AI编程工具测评&nbsp;&nbsp;CASE-003_数据研究工作台</div>
+      <div><span class="p">$</span> cat contact.md</div>
+      <div class="out">
+        github&nbsp;&nbsp;<a href="https://github.com/683280yj" target="_blank" rel="noopener">github.com/683280yj</a><br>
+        <!-- TODO: 补充邮箱或微信，例如：<br>email&nbsp;&nbsp;&nbsp;you@example.com -->
+      </div>
+      <div><span class="p">$</span> <span class="cursor"></span></div>
+    </div>
+  </div>
+  <div class="copy">
+    <span>© 2026 idky · AI PRODUCT PORTFOLIO</span>
+    <span>DESIGNED &amp; BUILT BY SELF · NO TEMPLATE</span>
+  </div>
+</footer>
+
+<script>
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
